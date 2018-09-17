@@ -1,0 +1,12 @@
+{
+  "groups": [{
+    "keys": "dog_01_jpg,dog_02_jpg,dog_03_jpg,dog_04_jpg,dog_05_jpg,dog_06_jpg",
+    "name": "preload"
+  }],
+  "resources": [{
+    "name": "dogsheet",
+    "subkeys": "dog_06_jpg,dog_05_jpg,dog_04_jpg,dog_03_jpg,dog_02_jpg,dog_01_jpg",
+    "type": "sheet",
+    "url": "packs/dogsheet.json"
+  }]
+}

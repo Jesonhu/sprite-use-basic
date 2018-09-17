@@ -1,0 +1,65 @@
+{
+  "file": "dogsheet.png",
+  "frames": {
+    "dog_01_jpg": {
+      "h": 300,
+      "offX": 0,
+      "offY": 0,
+      "sourceH": 300,
+      "sourceW": 451,
+      "w": 451,
+      "x": 1514,
+      "y": 306
+    },
+    "dog_02_jpg": {
+      "h": 300,
+      "offX": 0,
+      "offY": 0,
+      "sourceH": 300,
+      "sourceW": 423,
+      "w": 423,
+      "x": 1010,
+      "y": 327
+    },
+    "dog_03_jpg": {
+      "h": 321,
+      "offX": 0,
+      "offY": 0,
+      "sourceH": 321,
+      "sourceW": 500,
+      "w": 500,
+      "x": 1010,
+      "y": 2
+    },
+    "dog_04_jpg": {
+      "h": 334,
+      "offX": 0,
+      "offY": 0,
+      "sourceH": 334,
+      "sourceW": 500,
+      "w": 500,
+      "x": 506,
+      "y": 2
+    },
+    "dog_05_jpg": {
+      "h": 750,
+      "offX": 0,
+      "offY": 0,
+      "sourceH": 750,
+      "sourceW": 500,
+      "w": 500,
+      "x": 2,
+      "y": 2
+    },
+    "dog_06_jpg": {
+      "h": 300,
+      "offX": 0,
+      "offY": 0,
+      "sourceH": 300,
+      "sourceW": 479,
+      "w": 479,
+      "x": 1514,
+      "y": 2
+    }
+  }
+}

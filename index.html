@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Egret & H5 雪碧图测试</title>
+  <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap-reboot.min.css" rel="stylesheet">
+  <style>
+    .con {
+      display:inline-block;
+      margin-bottom:5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>使用方式1: 元素属性标记</h2>
+  <div class="wrap">
+    <div class="con con1" 
+     data-sprite="true" 
+     data-sprite-source="dogsheet"
+     data-sprite-name="dog_01_jpg"></div>
+    <div class="con con2" 
+    data-sprite="true"
+    data-sprite-source="dogsheet"
+    data-sprite-name="dog_02_jpg"
+    ></div>
+  </div>
+
+  <h2>使用方式2: 动态生成标签</h2>
+  <div id="wrap2"></div>
+
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <script>
+    ;(function($) {
+      const Page = {
+        init() {
+          this.xhrGetConfig()
+          .then(res => {
+            console.log(res);
+            this.setElementBackground(res);
+            this.renderElement(document.getElementById('wrap2'), res);
+          })
+          .catch(error => Promise.reject(error));
+        },
+        xhrGetConfig(url = './resource/packs/dogsheet.json') {
+          return new Promise((resolve, reject) => {
+            const _url = url + '?v=' + new Date().getTime();
+            $.ajax({
+              url: _url,
+              type: 'GET',
+              dataType: 'json',
+              success: function(res) {
+                resolve(res);
+              },
+              error: function(error) {
+                reject(error)
+              }
+            })
+          });
+        },
+        setElementBackground(config) {
+          // 匹配元素
+          const $dataSprite = $('[data-sprite="true"]');
+          // const _config = JSON.parse(config);
+          /** 雪碧图资源的名字 */
+          const _config = config;
+          /** 雪碧图资源的名字 */
+          let sourceName = '';
+          /** 雪碧图标记 */
+          let spriteName = '';
+          /** 雪碧图资源路径 */
+          let imgUrl = '';
+          /** 雪碧图配置 */
+          let frame;
+          /** 属性 `background-position` */
+          let backgroundPosition = '';
+
+          for (let i = 0, len = $dataSprite.length; i < len; i++) {
+            sourceName = $($dataSprite[i]).attr('data-sprite-source');
+            spriteName = $($dataSprite[i]).attr('data-sprite-name');
+            imgUrl = `url(./resource/packs/${sourceName}.png)`;
+            frame = config['frames'][spriteName];
+            backgroundPosition = `-${frame.x}px -${frame.y}px`;
+
+            $($dataSprite[i]).css({
+              'background-image': imgUrl,
+              'background-position': backgroundPosition,
+              'width': frame.w,
+              'height': frame.h
+            });
+          }
+        },
+
+        renderElement(parent, config) {
+          const _$parent = $(parent);
+          let elementStr = ''
+          let frame;
+
+          // for (let i = 0, len = config.frames.length; i < len; i++) {
+          //   frame = config.frames[i];
+          //   elementStr += `
+          //     <div class="con"
+          //     style="background-image:url(./resource/packs/${config.file}); background-position: -${frame.x}px -${frame.y}px; width: ${frame.w}px; height: ${frame.h}px";
+          //     ></div>`;
+            
+          //   console.log(elementStr);
+          // }
+
+          for (let key in config.frames) {
+            if (config.frames.hasOwnProperty(key)) {
+              frame = config.frames[key];
+              elementStr += `
+                <div class="con"
+                style="background-image:url(./resource/packs/${config.file}); background-position: -${frame.x}px -${frame.y}px; width: ${frame.w}px; height: ${frame.h}px";
+                ></div>`;
+            }
+          }
+
+          _$parent.append(elementStr);
+        }
+      }
+
+      Page.init();
+    })(jQuery);
+  </script>
+</body>
+</html>

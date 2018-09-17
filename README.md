@@ -11,3 +11,6 @@
 
 ## 参考资料
 + [纹理集的使用-白鹭文档](http://developer.egret.com/cn/github/egret-docs/Engine2D/bitmapTexture/useTexture/index.html)
++ [lozad.js：懒加载神器](https://segmentfault.com/a/1190000011527281)
++ [lozad.js-Github](https://github.com/ApoorvSaxena/lozad.js)
++ [IntersectionObserver API 使用教程](http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html)

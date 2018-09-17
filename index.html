@@ -31,9 +31,10 @@
   <div id="wrap2"></div>
 
   <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
 
   <script>
-    ;(function($) {
+    ;(function($, lozad) {
       const Page = {
         init() {
           this.xhrGetConfig()
@@ -85,11 +86,14 @@
             backgroundPosition = `-${frame.x}px -${frame.y}px`;
 
             $($dataSprite[i]).css({
-              'background-image': imgUrl,
+              // 'background-image': imgUrl,
+              'background-image': './resource/img/loading.jpg',
               'background-position': backgroundPosition,
               'width': frame.w,
               'height': frame.h
             });
+            $($dataSprite[i]).attr('data-background-image', `./resource/packs/${sourceName}.png`);
+            $($dataSprite[i]).addClass('lozad');
           }
         },
 
@@ -112,18 +116,31 @@
             if (config.frames.hasOwnProperty(key)) {
               frame = config.frames[key];
               elementStr += `
-                <div class="con"
-                style="background-image:url(./resource/packs/${config.file}); background-position: -${frame.x}px -${frame.y}px; width: ${frame.w}px; height: ${frame.h}px";
+                <div class="con lozad"
+                data-background-image=./resource/packs/${config.file}
+                style="background-image:url(./resource/img/loading.jpg); background-position: -${frame.x}px -${frame.y}px; width: ${frame.w}px; height: ${frame.h}px";
                 ></div>`;
             }
           }
 
           _$parent.append(elementStr);
+          this.initLazyload();
+        },
+
+        initLazyload() {
+          const observer = lozad('.lozad', {
+            // 延时时间
+            threshold: 1,
+            loaded: function(el) {
+              el.classList.add('loaded');
+            }
+          });
+          observer.observe();
         }
       }
 
       Page.init();
-    })(jQuery);
+    })(jQuery, lozad);
   </script>
 </body>
 </html>
